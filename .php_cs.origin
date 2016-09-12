@@ -1,0 +1,78 @@
+<?php
+require_once('vendor/autoload.php');
+$header = <<<EOF
+Fuel
+
+Fuel is a fast, lightweight, community driven PHP5 framework.
+
+@package    Fuel
+@version    1.8
+@author     Fuel Development Team
+@license    MIT License
+@copyright  2010 - 2014 Fuel Development Team
+@link       http://fuelphp.com
+EOF;
+
+/**
+ * http://kore1server.com/334/Laravel%E3%81%A7CS+Fixer%E3%82%92%E4%BD%BF%E3%81%86
+ */
+// Symfony\CS\Fixer\Contrib\HeaderCommentFixer::setHeader($header);
+
+$finder = Symfony\CS\Finder\DefaultFinder::create()
+    ->exclude('core')
+    ->exclude('packages')
+    ->exclude('vendor')
+    ->exclude('config')
+    ->exclude('views')
+    ->exclude('logs')
+    ->exclude('cache')
+    ->in(__DIR__);
+
+$fixers = [
+  '-psr0', // PSR−0を無効にしないと、名前空間の先頭がappに書き換えられる
+  // 'header_comment',
+  '-short_tag',
+  '-braces',
+  //'braces',
+  '-indentation',
+  'return', // リターンの前は一行開ける
+  'visibility',
+  'ereg_to_preg',
+  'short_array_syntax',
+  'array_element_no_space_before_comma',
+  'array_element_white_space_after_comma',
+  // '-line_after_namespace',
+  'phpdoc_order',
+  'unused_use',
+  'logical_not_operators_with_spaces',
+  // 'strict',
+  // 'strict_param',
+  'align_equals', // = の位置揃え
+  'single_quote',
+  // 'ordered_use',
+  // 'php_unit_construct',
+  // 'php_unit_strict',
+  // 'line_after_namespace',
+  '-single_line_after_imports',
+  'controls_spaces',
+  'linefeed', // 改行コードをLFに
+  'phpdoc_order',
+  'phpdoc_indent',
+  'phpdoc_inline_tag',
+  'phpdoc_no_access',
+  'phpdoc_no_empty_return',
+  'phpdoc_no_package',
+  'phpdoc_params',
+  'phpdoc_scalar',
+  'phpdoc_separation',
+  // 'phpdoc_short_description',
+  'phpdoc_to_comment'
+];
+
+$result = Symfony\CS\Config\Config::create()
+    ->level(Symfony\CS\FIXERINTERFACE::PSR2_LEVEL)
+    ->fixers($fixers)
+    ->finder($finder);
+    // ->setUsingCache(true);
+
+return $result;

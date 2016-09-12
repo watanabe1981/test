@@ -49,7 +49,7 @@ THE SOFTWARE.
         
         Checked in FuelPHP.WhiteSpace.DisallowSpaceIndent
     -->
-	<rule ref="FuelPHP.WhiteSpace.DisallowSpaceIndent"/>
+    <rule ref="FuelPHP.WhiteSpace.DisallowTabIndent"/>
 
     <!--
         Line Endings

@@ -1,6 +1,19 @@
 <?php
 
 /*
+ * Fuel
+ *
+ * Fuel is a fast, lightweight, community driven PHP5 framework.
+ *
+ * @package    Fuel
+ * @version    1.8
+ * @author     Fuel Development Team
+ * @license    MIT License
+ * @copyright  2010 - 2014 Fuel Development Team
+ * @link       http://fuelphp.com
+ */
+
+/*
  * This file is part of StaticReview
  *
  * Copyright (c) 2016 Isamu Watanabe <@i.watanabe_>
@@ -16,7 +29,7 @@ use StaticReview\Reporter\ReporterInterface;
 use StaticReview\Review\AbstractReview;
 class FuelPhpCodeSnifferReview extends AbstractReview
 {
-    protected $options = [];
+    protected $options = array();
 
     /**
      * Gets the value of an option.
@@ -38,7 +51,8 @@ class FuelPhpCodeSnifferReview extends AbstractReview
     {
         $builder = '';
 
-        foreach ($this->options as $option => $value) {
+        foreach ($this->options as $option => $value)
+        {
             $builder .= '--' . $option;
 
             if ($value) {
@@ -60,7 +74,8 @@ class FuelPhpCodeSnifferReview extends AbstractReview
      */
     public function setOption($option, $value)
     {
-        if ($option === 'report') {
+        if ($option === 'report')
+        {
             throw new \RuntimeException('"report" is not a valid option name.');
         }
 
@@ -86,9 +101,10 @@ class FuelPhpCodeSnifferReview extends AbstractReview
     public function review(ReporterInterface $reporter, FileInterface $file)
     {
         //$cmd = 'vendor/bin/phpcs --report=json ';
-        $cmd = 'vendor/eviweb/fuelphp-phpcs/bin/fuelphpcs --standard=ruleset.xml --report=json ';
+        $cmd = 'vendor/eviweb/fuelphp-phpcs/bin/fuelphpcs --standard=FuelPHP --extensions=php --ignore=fuel/app/tmp/* --ignore=fuel/app/logs/* --ignore=fuel/app/cache/* --ignore=fuel/app/views/* --ignore=fuel/app/config/* --ignore=fuel/app/tests_c/* --ignore=fuel/app/tests/* --ignore=fuel/app/lang/*  --ignore=src/* --report=json ';
 
-        if ($this->getOptionsForConsole()) {
+        if ($this->getOptionsForConsole())
+        {
             $cmd .= $this->getOptionsForConsole();
         }
 
@@ -97,19 +113,22 @@ class FuelPhpCodeSnifferReview extends AbstractReview
         $process = $this->getProcess($cmd);
         $process->run();
 
-        if (! $process->isSuccessful()) {
+        if ( ! $process->isSuccessful())
+        {
 
             // Create the array of outputs and remove empty values.
             $output = json_decode($process->getOutput(), true);
 
-            $filter = function ($acc, $file) {
-                if ($file['errors'] > 0 || $file['warnings'] > 0) {
+            $filter = function ($acc, $file)
+            {
+                if ($file['errors'] > 0 || $file['warnings'] > 0)
+                {
                     return $acc + $file['messages'];
                 }
             };
-            // var_dump($output['files']);
-            // var_dump($filter);
-            foreach (array_reduce($output['files'], $filter, []) as $error) {
+
+            foreach (array_reduce($output['files'], $filter, array()) as $error)
+            {
                 $message = $error['message'] . ' on line ' . $error['line'];
                 $reporter->warning($message, $this, $file);
             }

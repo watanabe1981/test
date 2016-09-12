@@ -13,6 +13,7 @@
         "phing/phing": "*",
         "phpunit/phpunit": "*",
         "phpmd/phpmd": "*",
+        "fabpot/php-cs-fixer": "@stable",
         "sebastian/phpcpd": "*",
         "squizlabs/php_codesniffer": "*",
         "eviweb/fuelphp-phpcs": "*"

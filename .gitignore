@@ -189,3 +189,10 @@ composer.lock
 /vendor/*
 
 !.gitkeep
+
+fuel/test
+fuel/packages
+fuel/extends
+fuel/core
+
+fuel
