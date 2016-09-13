@@ -22,10 +22,10 @@ IS_ERROR=0
 for FILE in `git status -uno --short | grep -E '^[AUM].*.php$'| cut -c3-`; do
     # シンタックスのチェック
     if php -l $FILE; then
-        # PHPMDで未使用変数などのチェック
-        if ! ./vendor/bin/phpmd $FILE text codesize,design,naming,unusedcode; then
-            IS_ERROR=1
-        fi
+        ## PHPMDで未使用変数などのチェック
+        #if ! ./vendor/bin/phpmd $FILE text codesize,design,naming,unusedcode; then
+        #    IS_ERROR=1
+        #fi
         # PSR準拠なコードかチェック
         if ! ./vendor/bin/php-cs-fixer fix $FILE --config-file="./.php_cs" --dry-run -v --diff; then
             IS_ERROR=1
@@ -37,11 +37,6 @@ for FILE in `git status -uno --short | grep -E '^[AUM].*.php$'| cut -c3-`; do
         IS_ERROR=1
     fi
 done
- 
-# composer.jsonのバリデーション
-if ! ./composer.phar validate; then
-    IS_ERROR=1
-fi
  
 # テストを実行
 #if ! ./vendor/bin/phpunit -c tests/phpunit.xml; then

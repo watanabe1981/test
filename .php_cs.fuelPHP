@@ -39,8 +39,8 @@ $fixers = [
     'trailing_spaces', // 行の末尾の空白を除去する
     'php_closing_tag', // ファイルがPHPのみのときは
     'visibility', // アクセス権はすべてつけないとだめ
-    //'-braces',
-    '+braces',
+    '-braces',
+    //'+braces',
     'eof_ending', // ファイルの末尾は一行の空白で終わる
     'align_equals', // = の位置揃え
     'single_quote', // シングルクォートでの囲みを強制
@@ -52,8 +52,8 @@ $fixers = [
     'php_unit_strict',
     'strict',
     'strict_param',
-'-single_line_after_imports',
-'controls_spaces',
+    '-single_line_after_imports',
+    'controls_spaces',
     'return', // リターンの前は一行開ける
     'ereg_to_preg',
     'array_element_no_space_before_comma',
