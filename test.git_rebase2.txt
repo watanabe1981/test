@@ -1,7 +1,13 @@
 test
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 test
 test
 
 >>>>>>> 9557ac8... [test] git rebase test2
+=======
+test
+test
+
+>>>>>>> 5ea8e87c724467889900059ad18d77594a36531d
