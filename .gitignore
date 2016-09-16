@@ -190,6 +190,7 @@ composer.lock
 
 !.gitkeep
 
+!fuel/app/classes/controller/manage/sample.php
 fuel/test
 fuel/packages
 fuel/extends
